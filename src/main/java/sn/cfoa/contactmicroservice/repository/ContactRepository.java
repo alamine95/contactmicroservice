@@ -1,0 +1,9 @@
+package sn.cfoa.contactmicroservice.repository;
+
+import org.springframework.data.repository.CrudRepository;
+
+import sn.cfoa.contactmicroservice.model.Contact;
+
+public interface ContactRepository extends CrudRepository<Contact, Integer> {
+
+}
