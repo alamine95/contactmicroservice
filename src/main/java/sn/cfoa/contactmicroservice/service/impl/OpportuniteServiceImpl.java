@@ -35,11 +35,14 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 	@Override
 	public OpportuniteResponseDto addOpportunite(OpportuniteRequestDto opportuniteRequestDto) {
 		Opportunite opportunite = new Opportunite();
-		opportunite.setNom(opportuniteRequestDto.getNom());
-		opportunite.setType(opportuniteRequestDto.getType());
-		opportunite.setEtape(opportuniteRequestDto.getEtape());
-		opportunite.setMontant(opportuniteRequestDto.getMontant());
-		opportunite.setDate(opportuniteRequestDto.getDate());
+		opportunite.setMatricule(opportuniteRequestDto.getMatricule());
+		opportunite.setMec(opportuniteRequestDto.getMec());
+		opportunite.setValVenal(opportuniteRequestDto.getValVenal());
+		opportunite.setValNeuf(opportuniteRequestDto.getValNeuf());
+		opportunite.setDebut(opportuniteRequestDto.getDebut());
+		opportunite.setFin(opportuniteRequestDto.getFin());
+		opportunite.setDureContrat(opportuniteRequestDto.getDureContrat());
+		opportunite.setPrime(opportuniteRequestDto.getPrime());
 		if(opportuniteRequestDto.getContactId() == null) {
 			throw new IllegalArgumentException("opportinute need a contact");
 		}
@@ -73,15 +76,19 @@ public class OpportuniteServiceImpl implements OpportuniteService {
 	@Override
 	public OpportuniteResponseDto editOpportunite(Integer opportuniteId, OpportuniteRequestDto opportuniteRequestDto) {
 		Opportunite opportuniteToEdit = getOpportunite(opportuniteId);
-		opportuniteToEdit.setNom(opportuniteRequestDto.getNom());
-		opportuniteToEdit.setType(opportuniteRequestDto.getType());
-		opportuniteToEdit.setEtape(opportuniteRequestDto.getEtape());
-		opportuniteToEdit.setMontant(opportuniteRequestDto.getMontant());
-		opportuniteToEdit.setDate(opportuniteRequestDto.getDate());
+		opportuniteToEdit.setMatricule(opportuniteRequestDto.getMatricule());
+		opportuniteToEdit.setMec(opportuniteRequestDto.getMec());
+		opportuniteToEdit.setValVenal(opportuniteRequestDto.getValVenal());
+		opportuniteToEdit.setValNeuf(opportuniteRequestDto.getValNeuf());
+		opportuniteToEdit.setDebut(opportuniteRequestDto.getDebut());
+		opportuniteToEdit.setFin(opportuniteRequestDto.getFin());
+		opportuniteToEdit.setDureContrat(opportuniteRequestDto.getDureContrat());
+		opportuniteToEdit.setPrime(opportuniteRequestDto.getPrime());
 		if(opportuniteRequestDto.getContactId() != null) {
 			Contact contact = contactService.getContact(opportuniteRequestDto.getContactId());
 			opportuniteToEdit.setContact(contact);
 		}
+		opportuniteRepository.save(opportuniteToEdit);
 		return mapper.opportuniteToOpportuniteResponseDto(opportuniteToEdit);
 	}
 

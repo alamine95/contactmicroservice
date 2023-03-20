@@ -26,25 +26,25 @@ public class Campagne {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name="nom_compagne", nullable=false)
+	@Column(name="nom_compagne")
 	private String nom;
 	
-	@Column(name="date_debut", nullable=false)
+	@Column(name="date_debut")
 	private Date dateDebut;
 	
-	@Column(name="chiffre_attendue", nullable=false)
+	@Column(name="chiffre_attendue")
 	private String chiffreAttendue;
 	
-	@Column(name="type", nullable = false)
+	@Column(name="type")
 	private String type;
 	
 	@Column(name="etape")
 	private String etape;
 	
-	@Column(name="date_fin", nullable = false)
+	@Column(name="date_fin")
 	private Date fin;
 
-	@OneToMany(mappedBy = "campagne", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "campagne", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	private List<Lead> leads  = new ArrayList<>();
 	
 	public Campagne() {}
@@ -131,7 +131,5 @@ public class Campagne {
 	public void setLeads(List<Lead> leads) {
 		this.leads = leads;
 	}
-	
-	
-	
+			
 }

@@ -16,12 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import sn.cfoa.contactmicroservice.dto.requestDto.OpportuniteRequestDto;
 import sn.cfoa.contactmicroservice.dto.responseDto.OpportuniteResponseDto;
+import sn.cfoa.contactmicroservice.model.Opportunite;
+import sn.cfoa.contactmicroservice.repository.OpportuniteRepository;
 import sn.cfoa.contactmicroservice.service.OpportuniteService;
 
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin(origins = "http://localhost:3000")
 public class OpportuniteController {
+	
+	@Autowired
+	private OpportuniteRepository opRepo;
 
 	@Autowired
 	private final OpportuniteService opportuniteService;
@@ -50,6 +55,11 @@ public class OpportuniteController {
 	public ResponseEntity<List<OpportuniteResponseDto>> getOpportunites(){
 		List<OpportuniteResponseDto> opportuniteResponseDtos = opportuniteService.getOpportunites();
 		return new ResponseEntity<>(opportuniteResponseDtos, HttpStatus.OK);
+	}
+	
+	@GetMapping("/opportunites/contact/{id}")
+	public ResponseEntity<List<Opportunite>> getOpportunitesByContact(@PathVariable Integer id){
+		return new ResponseEntity<List<Opportunite>>(opRepo.getOpportuniteByContactId(id), HttpStatus.OK);
 	}
 	
 	// Edite Opportunite By Id

@@ -7,58 +7,88 @@ import lombok.Data;
 @Data
 public class OpportuniteRequestDto {
 
-	private String nom;
+	private String matricule;
 	
-	private String type;
+	private Date mec;
 	
-	private String etape;
+	private String valVenal;
 	
-	private String montant;
+	private String valNeuf;
 	
-	private Date date;
+	private Date debut;
+	
+	private Date fin;
+	
+	private String dureContrat;
+	
+	private String prime;
 	
 	private Integer contactId;
 	
 	private Integer leadId;
 
-	public String getNom() {
-		return nom;
+	public String getMatricule() {
+		return matricule;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setMatricule(String matricule) {
+		this.matricule = matricule;
 	}
 
-	public String getType() {
-		return type;
+	public Date getMec() {
+		return mec;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setMec(Date mec) {
+		this.mec = mec;
 	}
 
-	public String getEtape() {
-		return etape;
+	public String getValVenal() {
+		return valVenal;
 	}
 
-	public void setEtape(String etape) {
-		this.etape = etape;
+	public void setValVenal(String valVenal) {
+		this.valVenal = valVenal;
 	}
 
-	public String getMontant() {
-		return montant;
+	public String getValNeuf() {
+		return valNeuf;
 	}
 
-	public void setMontant(String montant) {
-		this.montant = montant;
+	public void setValNeuf(String valNeuf) {
+		this.valNeuf = valNeuf;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getDebut() {
+		return debut;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDebut(Date debut) {
+		this.debut = debut;
+	}
+
+	public Date getFin() {
+		return fin;
+	}
+
+	public void setFin(Date fin) {
+		this.fin = fin;
+	}
+
+	public String getDureContrat() {
+		return dureContrat;
+	}
+
+	public void setDureContrat(String dureContrat) {
+		this.dureContrat = dureContrat;
+	}
+
+	public String getPrime() {
+		return prime;
+	}
+
+	public void setPrime(String prime) {
+		this.prime = prime;
 	}
 
 	public Integer getContactId() {

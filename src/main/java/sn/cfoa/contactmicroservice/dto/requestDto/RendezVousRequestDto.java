@@ -11,6 +11,8 @@ public class RendezVousRequestDto {
 	
 	private String heure;
 	
+	private String object;
+	
 	private Integer contactId;
 
 	public Date getDate() {
@@ -35,6 +37,14 @@ public class RendezVousRequestDto {
 
 	public void setContactId(Integer contactId) {
 		this.contactId = contactId;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 	
 }

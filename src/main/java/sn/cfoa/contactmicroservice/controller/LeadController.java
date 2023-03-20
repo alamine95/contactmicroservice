@@ -16,12 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import sn.cfoa.contactmicroservice.dto.requestDto.LeadRequestDto;
 import sn.cfoa.contactmicroservice.dto.responseDto.LeadResponseDto;
+import sn.cfoa.contactmicroservice.model.Lead;
+import sn.cfoa.contactmicroservice.repository.LeadRepository;
 import sn.cfoa.contactmicroservice.service.LeadService;
 
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin(origins = "http://localhost:3000")
 public class LeadController {
+	
+	@Autowired
+	private LeadRepository leadRepository;
 
 	@Autowired(required = true)
 	private final LeadService leadService;
@@ -46,6 +51,11 @@ public class LeadController {
 	public ResponseEntity<List<LeadResponseDto>> getLeads(){
 		List<LeadResponseDto> leadResponseDtos = leadService.getLeads();
 		return new ResponseEntity<>(leadResponseDtos, HttpStatus.OK);
+	}
+	
+	@GetMapping("/leads/campagne/{id}")
+	public ResponseEntity<List<Lead>> getLeadByCampagneById(@PathVariable Integer id){
+		return new ResponseEntity<List<Lead>>(leadRepository.getLeadByCampagneId(id), HttpStatus.OK);
 	}
 	
 	@PostMapping("/leads/{id}")

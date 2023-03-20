@@ -10,6 +10,8 @@ public class RendezVousResponseDto {
 	
 	private String heure;
 	
+	private String object;
+	
 	private String contactName;
 
 	public Integer getId() {
@@ -43,5 +45,12 @@ public class RendezVousResponseDto {
 	public void setContactName(String contactName) {
 		this.contactName = contactName;
 	}
-	
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
+	}
 }

@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -30,15 +32,20 @@ public class RendezVous {
 	@Column(name="heure", nullable = false)
 	private String heure;
 	
+	@Column(name = "object")
+	private String object;
+	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "contact_id")
+	@JsonIgnore
 	private Contact contact;
 
 	public RendezVous() {}
 
-	public RendezVous(Date date, String heure, Contact contact) {
+	public RendezVous(Date date, String heure, String object, Contact contact) {
 		this.date = date;
 		this.heure = heure;
+		this.object = object;
 		this.contact = contact;
 	}
 
@@ -73,7 +80,13 @@ public class RendezVous {
 	public void setContact(Contact contact) {
 		this.contact = contact;
 	}
-	
-	
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
+	}
 	
 }

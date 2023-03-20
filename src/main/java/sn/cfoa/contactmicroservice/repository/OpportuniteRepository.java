@@ -1,9 +1,16 @@
 package sn.cfoa.contactmicroservice.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import sn.cfoa.contactmicroservice.model.Opportunite;
 
-public interface OpportuniteRepository extends CrudRepository<Opportunite, Integer> {
+@Repository
+public interface OpportuniteRepository extends JpaRepository<Opportunite, Integer> {
 
+	@Query("FROM Opportunite  where contact_id = :id")
+	List<Opportunite> getOpportuniteByContactId(Integer id);
 }

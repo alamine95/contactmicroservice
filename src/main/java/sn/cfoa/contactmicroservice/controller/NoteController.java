@@ -2,6 +2,7 @@ package sn.cfoa.contactmicroservice.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,12 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import sn.cfoa.contactmicroservice.dto.requestDto.NoteRequestDto;
 import sn.cfoa.contactmicroservice.dto.responseDto.NoteResponseDto;
+import sn.cfoa.contactmicroservice.model.Note;
+import sn.cfoa.contactmicroservice.repository.NoteRepository;
 import sn.cfoa.contactmicroservice.service.NoteService;
 
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin(origins = "http://localhost:3000")
 public class NoteController {
+	
+	@Autowired
+	private NoteRepository noteRepository;
 	
 	private NoteService noteService;
 
@@ -44,6 +50,11 @@ public class NoteController {
 	public ResponseEntity<List<NoteResponseDto>> getNotes(){
 		List<NoteResponseDto> noteResponseDtos = noteService.getNotes();
 		return new ResponseEntity<>(noteResponseDtos, HttpStatus.OK);
+	}
+	
+	@GetMapping("/notes/contact/{id}")
+	public ResponseEntity<List<Note>> getNoteByContact(@PathVariable Integer id){
+		return new ResponseEntity<List<Note>>(noteRepository.getNoteByContactId(id), HttpStatus.OK);
 	}
 	
 	@PostMapping("/notes/{id}")

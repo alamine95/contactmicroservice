@@ -16,12 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import sn.cfoa.contactmicroservice.dto.requestDto.TacheRequestDto;
 import sn.cfoa.contactmicroservice.dto.responseDto.TacheResponseDto;
+import sn.cfoa.contactmicroservice.model.Tache;
+import sn.cfoa.contactmicroservice.repository.TacheRepository;
 import sn.cfoa.contactmicroservice.service.TacheService;
 
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin(origins = "http://localhost:3000")
 public class TacheController {
+	
+	@Autowired
+	private TacheRepository tacheRepository;
 
 	@Autowired(required = true)
 	private final TacheService tacheService;
@@ -46,6 +51,11 @@ public class TacheController {
 	public ResponseEntity<List<TacheResponseDto>> getTaches(){
 		List<TacheResponseDto> tacheResponseDtos = tacheService.getTaches();
 		return new ResponseEntity<>(tacheResponseDtos, HttpStatus.OK);
+	}
+	
+	@GetMapping("/taches/contact/{id}")
+	public ResponseEntity<List<Tache>> getTacheByContact(@PathVariable Integer id){
+		return new ResponseEntity<List<Tache>>(tacheRepository.getTacheByContactId(id), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/taches/{id}")

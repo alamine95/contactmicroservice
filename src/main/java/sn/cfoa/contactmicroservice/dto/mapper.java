@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import sn.cfoa.contactmicroservice.dto.responseDto.CampagneResponseDto;
+import sn.cfoa.contactmicroservice.dto.responseDto.CategorieResponseDto;
 import sn.cfoa.contactmicroservice.dto.responseDto.ContactResponseDto;
 import sn.cfoa.contactmicroservice.dto.responseDto.LeadResponseDto;
 import sn.cfoa.contactmicroservice.dto.responseDto.NoteResponseDto;
@@ -12,6 +13,7 @@ import sn.cfoa.contactmicroservice.dto.responseDto.OpportuniteResponseDto;
 import sn.cfoa.contactmicroservice.dto.responseDto.RendezVousResponseDto;
 import sn.cfoa.contactmicroservice.dto.responseDto.TacheResponseDto;
 import sn.cfoa.contactmicroservice.model.Campagne;
+import sn.cfoa.contactmicroservice.model.Categorie;
 import sn.cfoa.contactmicroservice.model.Contact;
 import sn.cfoa.contactmicroservice.model.Lead;
 import sn.cfoa.contactmicroservice.model.Note;
@@ -77,11 +79,28 @@ public class mapper {
 		return contactResponseDtos;
 	}
 	
+	public static CategorieResponseDto categorieToCategorieResponseDto(Categorie categorie) {
+		CategorieResponseDto categorieResponseDto = new CategorieResponseDto();
+		categorieResponseDto.setCodeCate(categorie.getCodeCate());
+		categorieResponseDto.setLibelle(categorie.getLibelle());
+		categorieResponseDto.setDesc(categorie.getDesc());
+		return categorieResponseDto;
+	}
+	
+	public static List<CategorieResponseDto> categoriesToCategorieResponseDtos(List<Categorie> categories){
+		List<CategorieResponseDto> categorieResponseDtos = new ArrayList<>();
+		for(Categorie categorie: categories) {
+			categorieResponseDtos.add(categorieToCategorieResponseDto(categorie));
+		}
+		return categorieResponseDtos;
+	}
+	
 	public static RendezVousResponseDto rendezVousToRendezVousResponseDto(RendezVous rendezVous) {
 		RendezVousResponseDto rendezVousResponseDto = new RendezVousResponseDto();
 		rendezVousResponseDto.setId(rendezVous.getId());
 		rendezVousResponseDto.setDate(rendezVous.getDate());
 		rendezVousResponseDto.setHeure(rendezVous.getHeure());
+		rendezVousResponseDto.setObject(rendezVous.getObject());
 		return rendezVousResponseDto;
 	}
 	
@@ -115,11 +134,14 @@ public class mapper {
 	public static OpportuniteResponseDto opportuniteToOpportuniteResponseDto(Opportunite opportunite) {
 		OpportuniteResponseDto opportuniteResponseDto = new OpportuniteResponseDto();
 		opportuniteResponseDto.setId(opportunite.getId());
-		opportuniteResponseDto.setNom(opportunite.getNom());
-		opportuniteResponseDto.setType(opportunite.getType());
-		opportuniteResponseDto.setEtape(opportunite.getEtape());
-		opportuniteResponseDto.setMontant(opportunite.getMontant());
-		opportuniteResponseDto.setDate(opportunite.getDate());
+		opportuniteResponseDto.setMatricule(opportunite.getMatricule());
+		opportuniteResponseDto.setMec(opportunite.getMec());
+		opportuniteResponseDto.setValVenal(opportunite.getValVenal());
+		opportuniteResponseDto.setValNeuf(opportunite.getValNeuf());
+		opportuniteResponseDto.setDebut(opportunite.getDebut());
+		opportuniteResponseDto.setFin(opportunite.getFin());
+		opportuniteResponseDto.setDureContrat(opportunite.getDureContrat());
+		opportuniteResponseDto.setPrime(opportunite.getPrime());
 		//opportuniteResponseDto.setContactName(opportunite.getContact().getNom());
 		return opportuniteResponseDto;
 	}

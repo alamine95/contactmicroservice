@@ -2,6 +2,7 @@ package sn.cfoa.contactmicroservice.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,13 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import sn.cfoa.contactmicroservice.dto.requestDto.RendezVousRequestDto;
 import sn.cfoa.contactmicroservice.dto.responseDto.RendezVousResponseDto;
+import sn.cfoa.contactmicroservice.model.RendezVous;
+import sn.cfoa.contactmicroservice.repository.RendezVousRepository;
 import sn.cfoa.contactmicroservice.service.RendezVousService;
 
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin(origins = "http://localhost:3000")
 public class RendezVousController {
+	
+	@Autowired
+	private RendezVousRepository rvRepository;
 
+	@Autowired
 	private RendezVousService rendezVousService;
 
 	public RendezVousController(RendezVousService rendezVousService) {
@@ -44,6 +51,11 @@ public class RendezVousController {
 	public ResponseEntity<List<RendezVousResponseDto>> getRendezVouses(){
 		List<RendezVousResponseDto> rendezVousResponseDtos = rendezVousService.getRendezVouses();
 		return new ResponseEntity<>(rendezVousResponseDtos, HttpStatus.OK);
+	}
+	
+	@GetMapping("/rendezVous/contact/{id}")
+	public ResponseEntity<List<RendezVous>> getRendezVousByContact(@PathVariable Integer id){
+		return new ResponseEntity<List<RendezVous>>(rvRepository.getRendezVousByContactId(id), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/rendezVous/{id}")

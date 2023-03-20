@@ -1,4 +1,4 @@
-package sn.cfoa.contactmicroservice.model;
+	package sn.cfoa.contactmicroservice.model;
 
 import java.sql.Date;
 
@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -24,39 +26,59 @@ public class Opportunite {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name="nom_affaire", nullable = false)
-	private String nom;
+	@Column(name = "matricule", nullable = false)
+	private String matricule;
 	
-	@Column(name="type", nullable = false)
-	private String type;
+	@Column(name = "mec", nullable = false)
+	private Date mec;
 	
-	@Column(name="etape", nullable = false)
-	private String etape;
+	@Column(name = "valeur_venal", nullable = false)
+	private String valVenal;
 	
-	@Column(name="montant", nullable = true)
-	private String montant;
+	@Column(name = "valeur_neuf", nullable = false)
+	private String valNeuf;
 	
-	@Column(name="date", nullable = false)
-	private Date date;
+	@Column(name = "date_debut", nullable = false)
+	private Date debut;
+	
+	@Column(name = "date_fin", nullable = false)
+	private Date fin;
+	
+	@Column(name = "dure_contrat", nullable = false)
+	private String dureContrat;
+	
+	@Column(name = "prime", nullable = false)
+	private String prime;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "contact_id")
+	@JsonIgnore
 	private Contact contact;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "lead_id")
 	private Lead lead;
+	
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "categorie_id")
+	@JsonIgnore
+	private Categorie categorie;
 
 	public Opportunite() {}
 
-	public Opportunite(String nom, String type, String etape, String montant, Date date, Contact contact, Lead lead) {
-		this.nom = nom;
-		this.type = type;
-		this.etape = etape;
-		this.montant = montant;
-		this.date = date;
+	public Opportunite(String matricule, Date mec, String valVenal, String valNeuf, Date debut, Date fin,
+			String dureContrat, String prime, Contact contact, Lead lead, Categorie categorie) {
+		this.matricule = matricule;
+		this.mec = mec;
+		this.valVenal = valVenal;
+		this.valNeuf = valNeuf;
+		this.debut = debut;
+		this.fin = fin;
+		this.dureContrat = dureContrat;
+		this.prime = prime;
 		this.contact = contact;
 		this.lead = lead;
+		this.categorie = categorie;
 	}
 
 	public Integer getId() {
@@ -66,45 +88,69 @@ public class Opportunite {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public String getNom() {
-		return nom;
+	
+	public String getMatricule() {
+		return matricule;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setMatricule(String matricule) {
+		this.matricule = matricule;
 	}
 
-	public String getType() {
-		return type;
+	public Date getMec() {
+		return mec;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setMec(Date mec) {
+		this.mec = mec;
 	}
 
-	public String getEtape() {
-		return etape;
+	public String getValVenal() {
+		return valVenal;
 	}
 
-	public void setEtape(String etape) {
-		this.etape = etape;
+	public void setValVenal(String valVenal) {
+		this.valVenal = valVenal;
 	}
 
-	public String getMontant() {
-		return montant;
+	public String getValNeuf() {
+		return valNeuf;
 	}
 
-	public void setMontant(String montant) {
-		this.montant = montant;
+	public void setValNeuf(String valNeuf) {
+		this.valNeuf = valNeuf;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getDebut() {
+		return debut;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDebut(Date debut) {
+		this.debut = debut;
+	}
+
+	public Date getFin() {
+		return fin;
+	}
+
+	public void setFin(Date fin) {
+		this.fin = fin;
+	}
+
+	public String getDureContrat() {
+		return dureContrat;
+	}
+
+	public void setDureContrat(String dureContrat) {
+		this.dureContrat = dureContrat;
+	}
+
+	public String getPrime() {
+		return prime;
+	}
+
+	public void setPrime(String prime) {
+		this.prime = prime;
 	}
 
 	public Contact getContact() {

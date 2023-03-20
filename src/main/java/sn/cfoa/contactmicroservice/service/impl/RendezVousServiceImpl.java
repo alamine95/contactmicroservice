@@ -34,6 +34,7 @@ public class RendezVousServiceImpl implements RendezVousService {
 		RendezVous rendezVous = new RendezVous();
 		rendezVous.setDate(rendezVousRequestDto.getDate());
 		rendezVous.setHeure(rendezVousRequestDto.getHeure());
+		rendezVous.setObject(rendezVousRequestDto.getObject());
 		if(rendezVousRequestDto.getContactId() == null) {
 			throw new IllegalArgumentException("rendez-vous need a contact");
 		}
@@ -77,6 +78,7 @@ public class RendezVousServiceImpl implements RendezVousService {
 		RendezVous rendezVousToEdit = getRendezVous(rendezVousId);
 		rendezVousToEdit.setDate(rendezVousRequestDto.getDate());
 		rendezVousToEdit.setHeure(rendezVousRequestDto.getHeure());
+		rendezVousToEdit.setObject(rendezVousRequestDto.getObject());
 		if(rendezVousRequestDto.getContactId() != null) {
 			Contact contact = contactService.getContact(rendezVousRequestDto.getContactId());
 			rendezVousToEdit.setContact(contact);
