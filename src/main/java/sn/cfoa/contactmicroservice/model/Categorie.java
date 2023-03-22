@@ -30,7 +30,7 @@ public class Categorie {
 	@Column(name = "libelle", nullable = false, length = 255)
 	private String libelle;
 	
-	@Column(name = "desc", nullable = false, length = 255)
+	@Column(name = "description", nullable = false, length = 255)
 	private String desc;
 	
 	@OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
